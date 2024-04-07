@@ -2,6 +2,9 @@ const express = require('express');
 const http = require('http');
 const graphqlConfig = require('../src/config/graphql.config');
 const graphqlServerPrivate = require('./graphql-private/index');
+
+const modelSql = require('./model-sql/index');
+
 class Main {
     constructor(onReady) {
         this.onReady = onReady || function () { };
@@ -9,36 +12,30 @@ class Main {
 
     async start() {
         try {
+            console.log();
+            console.log(`\t\t== PostgreSQL`);
+            await modelSql.validateConnection();
+            console.log(`\t\t[✓] PostgreSQL model-sql is ready`);
 
-                let expressApp = null;
-                let httpServer = null; 
+            let expressApp = null;
+            let httpServer = null;
 
-            //     if (contextOption.grpc_client) {
-            //       console.log();
-            //       logger.i(`\t\t== gRPC Client`);
-            //       await grpcClient();
-            //       logger.i(`\t\t[✓] gRPC Client is started`);
-            //     }
+            expressApp = express();
+            httpServer = http.createServer(expressApp);
 
-            //     if (contextOption.graphql) {
+            expressApp.get('/', (req, res, next) => {
+                res.send("");
+            });
 
-                  expressApp = express();
-                  httpServer = http.createServer(expressApp);
+            console.log(`\t\t== GraphQL`);
 
-                  expressApp.get('/', (req,res,next)=>{
-                    res.send("");
-                  });
+            if (graphqlConfig.private_enable) {
+                await graphqlServerPrivate(expressApp, httpServer);
+            }
 
-                  console.log();
-            //       logger.i(`\t\t== GraphQL`);
-
-              if(graphqlConfig.private_enable){
-                    await graphqlServerPrivate(expressApp, httpServer);
-              }
-            
             await new Promise((resolve) => httpServer.listen({ port: graphqlConfig.port }, resolve));
 
-            //       logger.i(`\t\t[✓] GraphQL server is started`);
+            console.log(`\t\t[✓] GraphQL server is started`);
 
             //     }
 
