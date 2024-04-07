@@ -1,0 +1,11 @@
+# https://studio.apollographql.com/public/github/variant/current/schema/reference/scalars
+scalar JSON
+scalar Date
+scalar DateTime
+
+type ResponseMessage {
+  code: Int
+  success: Boolean
+  message: String
+  timestamp: Date
+}
