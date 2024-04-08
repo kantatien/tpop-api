@@ -37,8 +37,6 @@ class Main {
 
             console.log(`\t\t[✓] GraphQL server is started`);
 
-            //     }
-
             //     if (contextOption.redis) {
             //       console.log();
             //       logger.i(`\t\t== Redis`);
