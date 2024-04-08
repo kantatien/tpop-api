@@ -1,0 +1,96 @@
+type Query {
+  GetPurchaseHistory(
+    member_id:Int
+  ): GetPurchaseHistoryResponse
+}
+
+type Mutation {
+    RegisterMember(
+      member_email: String
+      username: String
+      password: String
+      title: String
+      firstname: String
+      lastname: String
+      middlename: String
+      display_name: String
+      phone_number: String
+      address: String
+      status: String
+    ): RegisterMemberResponse
+}
+
+
+type Member{
+  member_id: Int
+  member_email: String
+  username: String
+  password: String
+  title: String
+  firstname: String
+  lastname: String
+  middlename: String
+  display_name: String
+  phone_number: String
+  status: String
+  created_at: Date
+  created_by: String
+  updated_at: Date
+  updated_by: String
+  deleted_at: Date
+  deleted_by: String
+}
+
+type MemberPurchase{
+  member_id: Int
+  member_email: String
+  username: String
+  password: String
+  title: String
+  firstname: String
+  lastname: String
+  middlename: String
+  display_name: String
+  phone_number: String
+  status: String
+  purchase_history:[ReservationsTicketData]
+  created_at: Date
+  created_by: String
+  updated_at: Date
+  updated_by: String
+  deleted_at: Date
+  deleted_by: String
+}
+
+type ReservationsTicketData{
+    reservations_ticket_id: Int
+    reservations_datetime: Date
+    order_number: String
+    member_id: Int
+    seat_id: Int
+    seat_data:SeatData
+}
+
+type RegisterMemberResponse {
+  code: Int
+  success: Boolean
+  message: String
+  timestamp: Date
+  data: Member
+}
+
+
+type GetPurchaseHistoryResponse {
+  code: Int
+  success: Boolean
+  message: String
+  timestamp: Date
+  data: MemberPurchase
+  pagination:Pagination
+}
+type Pagination {
+  page: Int
+  limit: Int
+  total_page: Int
+  total_item: Int
+}

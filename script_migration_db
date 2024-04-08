@@ -1,0 +1,94 @@
+-- public."event" definition
+
+-- Drop table
+
+-- DROP TABLE public."event";
+
+CREATE TABLE public."event" (
+	event_id serial4 NOT NULL,
+	event_name varchar NULL,
+	event_description varchar NULL,
+	event_datetime timestamptz NULL,
+	event_booking_datetime timestamptz NULL,
+	image_url json NULL,
+	status varchar NULL,
+	created_at timestamptz NULL,
+	created_by varchar NULL,
+	updated_at timestamptz NULL,
+	updated_by varchar NULL,
+	deleted_at timestamptz NULL,
+	deleted_by varchar NULL,
+	event_location varchar NULL,
+	CONSTRAINT event_pk PRIMARY KEY (event_id)
+);
+
+-- public."member" definition
+
+-- Drop table
+
+-- DROP TABLE public."member";
+
+CREATE TABLE public."member" (
+	member_id serial4 NOT NULL,
+	member_email varchar NULL,
+	username varchar NULL,
+	"password" varchar NULL,
+	title varchar NULL,
+	firstname varchar NULL,
+	lastname varchar NULL,
+	middlename varchar NULL,
+	display_name varchar NULL,
+	phone_number varchar NULL,
+	status varchar NULL,
+	created_at timestamptz NULL,
+	created_by varchar NULL,
+	updated_at timestamptz NULL,
+	updated_by varchar NULL,
+	deleted_at timestamptz NULL,
+	deleted_by varchar NULL,
+	CONSTRAINT member_pk PRIMARY KEY (member_id)
+);
+
+-- public.reservations_ticket definition
+
+-- Drop table
+
+-- DROP TABLE public.reservations_ticket;
+
+CREATE TABLE public.reservations_ticket (
+	reservations_ticket_id serial4 NOT NULL,
+	reservations_datetime timestamptz NULL,
+	order_number varchar NULL,
+	member_id int4 NULL,
+	seat_id int4 NULL,
+	status varchar NULL,
+	created_at timestamptz NULL,
+	created_by varchar NULL,
+	updated_at timestamptz NULL,
+	updated_by varchar NULL,
+	deleted_at timestamptz NULL,
+	deleted_by varchar NULL,
+	CONSTRAINT reservations_ticket_pk PRIMARY KEY (reservations_ticket_id)
+);
+
+-- public.seat definition
+
+-- Drop table
+
+-- DROP TABLE public.seat;
+
+CREATE TABLE public.seat (
+	seat_id serial4 NOT NULL,
+	event_id int4 NULL,
+	"zone" varchar NULL,
+	"row" varchar NULL,
+	seat_number int4 NULL,
+	seat_status varchar NULL,
+	created_at timestamptz NULL,
+	created_by varchar NULL,
+	updated_at timestamptz NULL,
+	updated_by varchar NULL,
+	deleted_at timestamptz NULL,
+	deleted_by varchar NULL,
+	CONSTRAINT seat_pk PRIMARY KEY (seat_id)
+);

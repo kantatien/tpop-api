@@ -1,0 +1,105 @@
+# Query
+type Query {
+  GetEventById(event_id: Int!): GetEventByIdResponse
+  GetListEvent(
+    search: String
+    search_field:[String]
+    filter_start_datetime: DateTime
+    filter_end_datetime: DateTime
+    page: Int
+    limit: Int
+    sort: String
+    sort_by: [String]
+  ): GetListEventResponse
+}
+
+
+type Mutation {
+    CreateEvent(
+        event_name: String
+        event_description: String
+        event_location:String
+        event_datetime: Date
+        event_booking_datetime: Date
+        image_url: JSON
+        status: String
+    ): CreateEventResponse
+    UpdateEvent(
+        event_id: Int
+        event_name: String
+        event_description: String
+        event_location:String
+        event_datetime: Date
+        event_booking_datetime: Date
+        image_url: JSON
+        status: String
+    ): UpdateEventResponse
+    DeleteEvent( 
+        event_id: Int
+    ): DeleteEventResponse
+}
+
+type Event{
+    event_id: Int
+    event_name: String
+    event_description: String
+    event_location:String
+    event_datetime: Date
+    event_booking_datetime: Date
+    image_url: JSON
+    status: String
+    total_number_of_seats: Int
+    created_at: Date
+    created_by: String
+    updated_at: Date
+    updated_by: String
+    deleted_at: Date
+    deleted_by: String
+}
+
+type CreateEventResponse {
+  code: Int
+  success: Boolean
+  message: String
+  timestamp: Date
+  data: Event
+}
+type UpdateEventResponse {
+  code: Int
+  success: Boolean
+  message: String
+  timestamp: Date
+  data: Event
+}
+type DeleteEventResponse {
+  code: Int
+  success: Boolean
+  message: String
+  timestamp: Date
+  data: Event
+}
+
+type GetEventByIdResponse {
+  code: Int
+  success: Boolean
+  message: String
+  timestamp: Date
+  data: Event
+}
+
+type GetListEventResponse {
+  code: Int
+  success: Boolean
+  message: String
+  timestamp: Date
+  data: [Event]
+  pagination:Pagination
+}
+
+
+type Pagination {
+  page: Int
+  limit: Int
+  total_page: Int
+  total_item: Int
+}
